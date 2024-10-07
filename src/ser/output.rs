@@ -8,6 +8,8 @@ use internal::utils::BufVec;
 
 use error::Error;
 
+use crate::{error, internal};
+
 pub struct OutputPart {
     len_buf_len: u8,
     len_buf: [u8; 9],
@@ -147,9 +149,13 @@ mod tests {
 
     use bytes::Buf;
     use iovec::IoVec;
-    use partial_io::{GenNoErrors, PartialRead, PartialWithErrors};
+    use partial_io::quickcheck_types::GenNoErrors;
+    use partial_io::quickcheck_types::PartialWithErrors;
+    use partial_io::PartialRead;
 
     use internal::gob::Message;
+
+    use crate::internal;
 
     use super::OutputPart;
 

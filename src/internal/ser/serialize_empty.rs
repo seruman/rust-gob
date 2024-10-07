@@ -5,6 +5,8 @@ use serde_schema::types::Type;
 
 use ser::{Schema, TypeId};
 
+use crate::ser;
+
 pub struct SerializeEmptyValue<S> {
     schema: S,
     type_id: TypeId,

@@ -3,6 +3,8 @@ use std::collections::BTreeMap;
 use serde_schema::types::Type;
 
 mod wire_type;
+use crate::schema;
+
 pub(crate) use self::wire_type::WireType;
 
 mod common_type;

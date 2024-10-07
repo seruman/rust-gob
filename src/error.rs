@@ -38,7 +38,7 @@ impl fmt::Display for Error {
         match self.inner {
             ErrorInner::Io(ref err) => write!(f, "i/o error: {}", err),
             ErrorInner::Other(ref msg) => {
-                write!(f, "{}: {}", ::std::error::Error::description(self), msg)
+                write!(f, "{}: {}", self, msg)
             }
         }
     }

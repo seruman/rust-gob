@@ -14,6 +14,8 @@ use internal::utils::{Bow, Buffer};
 use internal::de::FieldValueDeserializer;
 use internal::de::ValueDeserializer;
 
+use crate::{error, internal};
+
 pub struct StreamDeserializer<R> {
     defs: Types,
     stream: Stream<R>,

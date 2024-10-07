@@ -1,6 +1,7 @@
 [package]
 name = "gob"
 version = "0.1.0"
+edition = "2021"
 authors = ["Sam Rijs <srijs@airpost.net>"]
 description = "serde support for the gob binary format"
 license = "MIT"
@@ -9,22 +10,22 @@ repository = "https://github.com/srijs/rust-gob"
 documentation = "https://docs.rs/gob"
 
 [dependencies]
-byteorder = "1.2.2"
-bytes = "0.4.6"
-iovec = "0.1.2"
-lazy_static = "1.0.0"
+byteorder = "1.5.0"
+bytes = "0.4.12"
+iovec = "0.1.4"
+lazy_static = "1.5.0"
 owning_ref = "0.3.3"
-safemem = "0.3.0"
-serde = "1.0.39"
-serde_derive = "1.0.42"
+safemem = "0.3.3"
+serde = "1.0.210"
+serde_derive = "1.0.210"
 serde_schema = { version = "0.0.1", features = ["bytes"] }
 serde_schema_derive = "0.0.1"
 
 [dev-dependencies]
 bencher = "0.1.5"
-serde_bytes = "0.10.4"
-partial-io = { version = "0.3.0", features = ["quickcheck"] }
-quickcheck = "0.6.2"
+serde_bytes = "0.10.5"
+partial-io = { version = "0.5.4", features = ["quickcheck1"] }
+quickcheck = "1.0.3"
 
 [[bench]]
 name = "serialize"

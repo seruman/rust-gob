@@ -82,7 +82,7 @@ pub static FIELD_TYPE_DEF_2: WireType = {
 
 lazy_static! {
     pub static ref FIELD_TYPE_SLICE_DEF: Type<TypeId> =
-        { Type::build().seq_type(None, TypeId::FIELD_TYPE) };
+        Type::build().seq_type(None, TypeId::FIELD_TYPE);
 }
 
 pub static FIELD_TYPE_SLICE_DEF_2: WireType = {

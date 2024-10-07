@@ -11,7 +11,8 @@ use std::collections::HashMap;
 use std::io::Cursor;
 
 use gob::{error::ErrorKind, Deserializer, StreamDeserializer};
-use partial_io::{GenWouldBlock, PartialRead, PartialWithErrors};
+use partial_io::quickcheck_types::{GenWouldBlock, PartialWithErrors};
+use partial_io::PartialRead;
 use serde::Deserialize;
 use serde_bytes::{ByteBuf, Bytes};
 
@@ -379,7 +380,7 @@ fn point_struct() {
 #[test]
 fn unit_struct() {
     #[derive(Deserialize)]
-    struct EmptyStruct {};
+    struct EmptyStruct {}
 
     let deserializer =
         Deserializer::from_slice(include_bytes!("reference/output/empty_struct.gob"));

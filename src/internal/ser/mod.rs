@@ -3,14 +3,20 @@ use std::borrow::{Borrow, BorrowMut};
 use serde::ser::{self, Impossible};
 use serde::Serialize;
 
+use crate::internal;
+use crate::ser as other_ser;
+
 use internal::gob::Message;
 use internal::types::TypeId;
 
 use error::Error;
+use other_ser::Output;
+use other_ser::OutputPart;
 use schema::Schema;
-use ser::{Output, OutputPart};
 
 mod serialize_struct;
+use crate::{error, schema};
+
 pub(crate) use self::serialize_struct::SerializeStructValue;
 mod serialize_seq;
 pub(crate) use self::serialize_seq::SerializeSeqValue;
@@ -22,8 +28,7 @@ mod serialize_variant;
 pub(crate) use self::serialize_variant::{SerializeStructVariantValue, SerializeVariantValue};
 mod serialize_empty;
 pub(crate) use self::serialize_empty::SerializeEmptyValue;
-mod serialize_wire_types;
-pub(crate) use self::serialize_wire_types::SerializeWireTypes;
+pub(crate) mod serialize_wire_types;
 
 pub(crate) struct SerializationOk<S> {
     pub ctx: SerializationCtx<S>,

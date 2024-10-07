@@ -8,6 +8,8 @@ use error::Error;
 use internal::types::TypeId;
 use schema::{Schema, SchemaType};
 
+use crate::{error, internal, schema};
+
 use super::{FieldValueSerializer, SerializationCtx, SerializationOk};
 
 pub(crate) struct SerializeStructValue<S> {

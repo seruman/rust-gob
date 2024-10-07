@@ -6,6 +6,8 @@ use error::Error;
 use internal::types::TypeId;
 use schema::Schema;
 
+use crate::{error, internal, schema};
+
 use super::{SerializationCtx, SerializationOk, SerializeSeqValue};
 
 pub(crate) enum SerializeTupleValue<S> {

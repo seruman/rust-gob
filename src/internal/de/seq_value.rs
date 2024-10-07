@@ -2,10 +2,13 @@ use std::io::Cursor;
 
 use serde::de::{self, DeserializeSeed, Deserializer, Visitor};
 
+use crate::{error, internal};
+
 use super::FieldValueDeserializer;
 use error::Error;
 use internal::gob::Message;
-use internal::types::{TypeId, Types};
+use internal::types::TypeId;
+use internal::types::Types;
 
 struct SeqAccess<'t, 'de>
 where

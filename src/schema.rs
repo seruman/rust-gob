@@ -9,9 +9,11 @@ use serde::{Deserialize, Deserializer};
 use serde::{Serialize, Serializer};
 use serde_schema::types::Type;
 
+use crate::internal::ser::serialize_wire_types::SerializeWireTypes;
 use error::Error;
-use internal::ser::SerializeWireTypes;
-use ser::{Output, OutputPart};
+use other_ser::{Output, OutputPart};
+
+use crate::{error, internal, ser as other_ser};
 
 #[derive(Clone)]
 pub(crate) enum SchemaType {
@@ -55,9 +57,10 @@ impl Schema {
     #[inline]
     pub(crate) fn lookup(&self, id: TypeId) -> Option<SchemaType> {
         if id.0 < CUSTOM_TYPE_ID_OFFSET {
-            ::internal::types::lookup_builtin(id).map(SchemaType::Builtin)
+            internal::types::lookup_builtin(id).map(SchemaType::Builtin)
         } else {
-            match self.schema_types
+            match self
+                .schema_types
                 .binary_search_by(|(probe_id, _)| probe_id.cmp(&id))
             {
                 Ok(pos) => Some(SchemaType::Custom(self.schema_types[pos].1.clone())),

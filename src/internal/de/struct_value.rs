@@ -4,10 +4,14 @@ use serde;
 use serde::de::{DeserializeSeed, Deserializer, IntoDeserializer, Visitor};
 use serde::de::{EnumAccess, MapAccess, VariantAccess};
 
+use crate::{error, internal};
+
 use super::FieldValueDeserializer;
 use error::Error;
-use internal::gob::Message;
-use internal::types::{FieldType, StructType, TypeId, Types};
+use internal::{
+    gob::Message,
+    types::{FieldType, StructType, TypeId, Types},
+};
 
 struct StructAccess<'t, 'de>
 where

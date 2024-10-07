@@ -7,6 +7,8 @@ use error::Error;
 use internal::gob::Message;
 use internal::types::{TypeId, Types, WireType};
 
+use crate::{error, internal};
+
 use super::field_value::FieldValueDeserializer;
 use super::struct_value::StructValueDeserializer;
 

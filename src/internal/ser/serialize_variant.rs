@@ -8,6 +8,8 @@ use error::Error;
 use internal::types::TypeId;
 use schema::{Schema, SchemaType};
 
+use crate::{error, internal, schema};
+
 use super::SerializeStructValue;
 use super::{FieldValueSerializer, SerializationCtx, SerializationOk};
 

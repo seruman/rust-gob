@@ -6,6 +6,8 @@ use internal::types::TypeId;
 use internal::utils::Bow;
 use schema::Schema;
 
+use crate::{error, internal, schema};
+
 use super::output::Output;
 
 pub struct SerializeTuple<'t, O> {

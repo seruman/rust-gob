@@ -13,6 +13,8 @@ use error::Error;
 pub use schema::{Schema, TypeId};
 
 mod output;
+use crate::{error, internal, schema};
+
 pub use self::output::{Output, OutputBuffer, OutputPart, OutputWrite};
 
 mod serialize_struct;
@@ -348,8 +350,8 @@ impl<'t, O: Output> ser::Serializer for Serializer<'t, O> {
         _len: usize,
     ) -> Result<Self::SerializeStructVariant, Self::Error> {
         self.ctx.value.write_int(self.type_id.0);
-        let inner =
-            SerializeVariantValue::new(self.ctx, self.type_id, variant_index)?.serialize_struct()?;
+        let inner = SerializeVariantValue::new(self.ctx, self.type_id, variant_index)?
+            .serialize_struct()?;
         SerializeStructVariant::new(inner, self.out)
     }
 }

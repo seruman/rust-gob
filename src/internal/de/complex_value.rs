@@ -2,8 +2,8 @@ use std::io::Cursor;
 
 use serde::de::{DeserializeSeed, Deserializer, IntoDeserializer, SeqAccess, Visitor};
 
+use crate::{error, internal::gob::Message};
 use error::Error;
-use internal::gob::Message;
 
 struct ComplexSeqAccess<'t, 'de>
 where

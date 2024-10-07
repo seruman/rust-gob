@@ -8,6 +8,8 @@ use error::Error;
 use internal::gob::Message;
 use internal::types::{TypeId, Types, WireType};
 
+use crate::{error, internal};
+
 use super::complex_value::ComplexValueDeserializer;
 use super::map_value::MapValueDeserializer;
 use super::seq_value::SeqValueDeserializer;
@@ -51,10 +53,13 @@ macro_rules! primitive {
             if self.type_id == TypeId::$id {
                 visitor.$visit($parse(self)? as $tname)
             } else {
-                Err(serde::de::Error::custom(format!("expected {}", stringify!($tname))))
+                Err(serde::de::Error::custom(format!(
+                    "expected {}",
+                    stringify!($tname)
+                )))
             }
         }
-    }
+    };
 }
 
 impl<'t, 'de> serde::Deserializer<'de> for FieldValueDeserializer<'t, 'de> {
@@ -112,30 +117,41 @@ impl<'t, 'de> serde::Deserializer<'de> for FieldValueDeserializer<'t, 'de> {
         }
     }
 
-    primitive!(deserialize_bool, bool, visit_bool, BOOL, |d: Self| d.msg
+    primitive!(deserialize_bool, bool, visit_bool, BOOL, |d: Self| d
+        .msg
         .read_bool());
 
-    primitive!(deserialize_i8, i8, visit_i8, INT, |d: Self| d.msg
+    primitive!(deserialize_i8, i8, visit_i8, INT, |d: Self| d
+        .msg
         .read_int());
-    primitive!(deserialize_i16, i16, visit_i16, INT, |d: Self| d.msg
+    primitive!(deserialize_i16, i16, visit_i16, INT, |d: Self| d
+        .msg
         .read_int());
-    primitive!(deserialize_i32, i32, visit_i32, INT, |d: Self| d.msg
+    primitive!(deserialize_i32, i32, visit_i32, INT, |d: Self| d
+        .msg
         .read_int());
-    primitive!(deserialize_i64, i64, visit_i64, INT, |d: Self| d.msg
+    primitive!(deserialize_i64, i64, visit_i64, INT, |d: Self| d
+        .msg
         .read_int());
 
-    primitive!(deserialize_u8, u8, visit_u8, UINT, |d: Self| d.msg
+    primitive!(deserialize_u8, u8, visit_u8, UINT, |d: Self| d
+        .msg
         .read_uint());
-    primitive!(deserialize_u16, u16, visit_u16, UINT, |d: Self| d.msg
+    primitive!(deserialize_u16, u16, visit_u16, UINT, |d: Self| d
+        .msg
         .read_uint());
-    primitive!(deserialize_u32, u32, visit_u32, UINT, |d: Self| d.msg
+    primitive!(deserialize_u32, u32, visit_u32, UINT, |d: Self| d
+        .msg
         .read_uint());
-    primitive!(deserialize_u64, u64, visit_u64, UINT, |d: Self| d.msg
+    primitive!(deserialize_u64, u64, visit_u64, UINT, |d: Self| d
+        .msg
         .read_uint());
 
-    primitive!(deserialize_f32, f32, visit_f32, FLOAT, |d: Self| d.msg
+    primitive!(deserialize_f32, f32, visit_f32, FLOAT, |d: Self| d
+        .msg
         .read_float());
-    primitive!(deserialize_f64, f64, visit_f64, FLOAT, |d: Self| d.msg
+    primitive!(deserialize_f64, f64, visit_f64, FLOAT, |d: Self| d
+        .msg
         .read_float());
 
     fn deserialize_str<V: Visitor<'de>>(mut self, visitor: V) -> Result<V::Value, Self::Error> {

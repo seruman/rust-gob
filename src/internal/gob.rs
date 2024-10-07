@@ -7,6 +7,9 @@ use bytes::{Buf, BufMut};
 use error::Error;
 use internal::utils::Buffer;
 
+use crate::error;
+use crate::internal;
+
 #[derive(Debug)]
 pub(crate) enum MessageReadError {
     Incomplete,

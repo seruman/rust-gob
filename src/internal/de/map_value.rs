@@ -2,6 +2,8 @@ use std::io::Cursor;
 
 use serde::de::{DeserializeSeed, Deserializer, MapAccess, Visitor};
 
+use crate::{error, internal};
+
 use super::FieldValueDeserializer;
 use error::Error;
 use internal::gob::Message;
